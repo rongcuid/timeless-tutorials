@@ -33,7 +33,7 @@ import System.IO
 -- write, and doesn't really give any advantage of FRP, and gave me much more headache than writing
 -- using "normal" methods.
 --
--- This series should hopefully guide you to be familiar with "my" way of FR. Of course, I do not
+-- This series should hopefully guide you to be familiar with "my" way of FRP. Of course, I do not
 -- have real serious UI experiences, so I am also learning. Again, expect radical changes, but the
 -- code should still work.
 --

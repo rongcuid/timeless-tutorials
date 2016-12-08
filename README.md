@@ -2,7 +2,7 @@ This series of tutorial aims at its corresponding major version of Timeless. For
 
 As a project goal, this tutorial series will also aid the development and refactor of Timeless. Major breakage is unlikely if you don't use underlying Signals directly. However, if you do, good luck. And it is important that, if you have seen my timeless-0.9.x.x tutorials, they would probably still work with modifications. However, that version is way too primitive and messy to write, and doesn't really give any advantage of FRP, and gave me much more headache than writing using "normal" methods.
 
-This series should hopefully guide you to be familiar with "my" way of FR. Of course, I do not have real serious UI experiences, so I am also learning. Again, expect radical changes, but the code should still work.
+This series should hopefully guide you to be familiar with "my" way of FRP. Of course, I do not have real serious UI experiences, so I am also learning. Again, expect radical changes, but the code should still work.
 
 Feel free to skip this section if you don't want to read stories.
 
