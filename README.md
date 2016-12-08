@@ -1,3 +1,5 @@
+[timeless](https://hackage.haskell.org/package/timeless)
+
 This series of tutorial aims at its corresponding major version of Timeless. For example, a version number of 1.x.x.x means it should be compatible with Timeless version >= 1 and < 2.
 
 As a project goal, this tutorial series will also aid the development and refactor of Timeless. Major breakage is unlikely if you don't use underlying Signals directly. However, if you do, good luck. And it is important that, if you have seen my timeless-0.9.x.x tutorials, they would probably still work with modifications. However, that version is way too primitive and messy to write, and doesn't really give any advantage of FRP, and gave me much more headache than writing using "normal" methods.
