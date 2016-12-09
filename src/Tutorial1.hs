@@ -273,46 +273,53 @@ import System.IO
 
 
 
-sMVarSource mvar = sourceS $ tryTakeMVar mvar
-
-initPrint :: IO (MVar String)
-initPrint = do
-  mvar <- newEmptyMVar
-  forkIO $ loop mvar
-  return mvar
-    where
-      loop mvar = do
-        s <- getLine
-        putMVar mvar s
-        loop mvar
-
-sPutStrSink = sinkS $ \s -> putStr s >> hFlush stdout
-
-display coin = "Current coins: " ++ (show coin) ++ "\n>>> "
-
+-- sMVarSource mvar = sourceS $ tryTakeMVar mvar
+--
+-- initPrint :: IO (MVar String)
+-- initPrint = do
+--   mvar <- newEmptyMVar
+--   forkIO $ loop mvar
+--   return mvar
+--     where
+--       loop mvar = do
+--         s <- getLine
+--         putMVar mvar s
+--         loop mvar
+--
+-- sPutStrSink = sinkS $ \s -> putStr s >> hFlush stdout
+--
+-- display coin = "Current coins: " ++ show coin ++ "\n>>> "
+--
 accumulator :: ((), Integer) -> Integer
 accumulator (_, coin) = coin + 1
+--
+-- parse "insert" = Just ()
+-- parse _ = Nothing
+--
+-- box mvar = proc () -> do
+--   sCommand <- sMVarSource mvar -< ()
+--   sTrigger <- arrS (const ()) -< sCommand
+--   sAccumTrig <- arr (>>=parse) -< sCommand
+--   cCoin <- state 0 accumulator -< sAccumTrig
+--   cDisplay <- arr display -< cCoin
+--   sInitTrig <- onceS () -< ()
+--   sDispTrig <- mergeSP -< (sInitTrig, sTrigger)
+--   sDisplay <- sample -< (sDispTrig, cDisplay)
+--   sPutStrSink -< sDisplay
+--
+-- testBox mvar = proc () -> do
+--   str <- sMVarSource mvar -< ()
+--   sPutStrSink -< str
+--
 
-parse "insert" = Just ()
-parse _ = Nothing
+test0 = proc () -> do
+  s <- state 0 accumulator -< Nothing
+  returnA -< ()
 
-box mvar = proc () -> do
-  sCommand <- sMVarSource mvar -< ()
-  sTrigger <- arrS (const ()) -< sCommand
-  sAccumTrig <- arr (>>=parse) -< sCommand
-  cCoin <- state 0 accumulator -< sAccumTrig
-  cDisplay <- arr display -< cCoin
-  sInitTrig <- onceS () -< ()
-  sDispTrig <- mergeSP -< (sInitTrig, sTrigger)
-  sDisplay <- sample -< (sDispTrig, cDisplay)
-  sPutStrSink -< sDisplay
-
-testBox mvar = proc () -> do
-  str <- sMVarSource mvar -< ()
-  sPutStrSink -< str
 
 main :: IO ()
 main = do
-  mvar <- initPrint
-  --runBox $ testBox mvar
-  runBox $ box mvar
+  -- mvar <- initPrint
+  -- runBox $ testBox mvar -- No Leak
+  runBox test0
+  --runBox $ box mvar
